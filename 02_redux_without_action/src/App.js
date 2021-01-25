@@ -1,27 +1,36 @@
 import React from 'react'
-import { createIncrement ,createDecrement} from './redux/action_creator'
+
 export default class App extends React.Component {
     // state = {
     //     count:0
     // }
-    increment = () => {
+    add = () => {
         // let {count} = this.state
         let {value} = this.refs.selectNumber
         // this.setState({count:(count + value*1) })
-        this.props.store.dispatch(createIncrement(value*1))
+        this.props.store.dispatch({
+            type: 'add' ,
+            value: value*1
+        })
     }
-    decrement = () => {
+    dec = () => {
         // let { count } = this.state
         let { value } = this.refs.selectNumber
         // this.setState({ count: (count - value * 1) })
-        this.props.store.dispatch(createDecrement(value*1))
+        this.props.store.dispatch({
+            type: 'dec',
+            value: value * 1
+        })
     }
     incrementIfOdd = () => {
         let count  = this.props.store.getState()
         let { value } = this.refs.selectNumber
         if ( count % 2 === 1 ) {
             // this.setState({ count: (count + value * 1) })
-            this.props.store.dispatch(createIncrement(value * 1))
+            this.props.store.dispatch({
+                type: 'incrementIfOdd',
+                value: value * 1
+            })
         }
     }
     incrementAsync = () => {
@@ -29,7 +38,10 @@ export default class App extends React.Component {
         let { value } = this.refs.selectNumber
         setTimeout(() => {
             // this.setState({ count: (count + value * 1) })
-            this.props.store.dispatch(createIncrement(value * 1))
+            this.props.store.dispatch({
+                type: 'incrementAsync',
+                value: value * 1
+            })
         }, 1000);
     }
     render() {
@@ -41,8 +53,8 @@ export default class App extends React.Component {
                     <option value='2'>2</option>
                     <option value='3'>3</option>
                 </select>&nbsp;
-                <button onClick={this.increment}>+</button>&nbsp;
-                <button onClick={this.decrement}>-</button>&nbsp;
+                <button onClick={this.add}>+</button>&nbsp;
+                <button onClick={this.dec}>-</button>&nbsp;
                 <button onClick={this.incrementIfOdd}>increment if odd</button>&nbsp;
                 <button onClick={this.incrementAsync}>increment async</button>&nbsp;
             </div>
