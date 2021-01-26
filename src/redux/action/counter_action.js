@@ -1,4 +1,4 @@
-import {INCREMENT ,DECREMENT} from './action_types'
+import {INCREMENT ,DECREMENT} from '../action_types.js'
 
 export const createIncrement = value => ({type:INCREMENT ,value:value})
 
